@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.21.2">
+    <meta name="project" content="SSCS Ex v0.1.0">
+      <meta name="author" content="Jipen">
+    <title>SscsEx : (An attempt to) create a Simple SFTP Client/Serveur (SSCS) written in Elixir (Ex)... — SSCS Ex v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-de2388dc2f8074b0a4db.css" />
+    <script src="dist/sidebar_items-2ef0771db5.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/html-de2388dc2f8074b0a4db.js"></script>
+  </head>
+  <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="SscsEx.html" class="sidebar-projectName">
+SSCS Ex      </a>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+      <a href="SscsEx.html">
+        <img src="assets/logo.png" alt="SSCS Ex" class="sidebar-projectImage">
+      </a>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>SscsEx : (An attempt to) create a Simple SFTP Client/Serveur (SSCS) written in Elixir (Ex)...</h1>
+<h2 id="prior-and-very-important-notice" class="section-heading">
+  <a href="#prior-and-very-important-notice" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  PRIOR AND VERY IMPORTANT NOTICE !!!:
+</h2>
+
+<ul>
+<li><code class="inline">THIS is NOT a 100% bug free</code>: So USE IT at your OWN RISKS with NO GARANTEE AT ALL !
+</li>
+<li><code class="inline">THIS will probably NEVER BE UPDATED</code>: Just intended to give some pieces of help to those who are exploring the same matters (SSH/SFTP exchanges) in Elixir,
+</li>
+<li><code class="inline">ENGLISH IS NOT MY NATIVE LANGUAGE</code>: Beeing French is a very good excuse as the time spent to learn such a difficult/full of exceptions/full of oddities language as mine is lost to correctly learn others... Especially for an old and lazy bloke as me ! ;) 
+</li>
+</ul>
+<p>Now that&#39;s done, let&#39;s go !</p>
+<p>SscsEx is a basic sftp server with a client part added to allow files transfers between two SSCS servers.
+Authentification for connection from a SSCS server to another SSCS server uses public keys only. 
+The transfers are always processed by streaming files (chunk by chunk). 
+To avoid integrity problems, checksums of source and destination files are computed and compared for each transfer.
+When a transfer fails, resume can happen.
+If a SSCS server is (normally) stopped, the failed transfers are saved on a disk database (DETS) and when the server restart, these transfers are then resumed.
+If some part of the destination file is already present and its size is less than the source file size, the difference is appended to the destination file, whatever could the <code class="inline">OVERWRITE</code> option (see below) be. </p>
+<p>The Elixir files of this project can be compiled as an Elixir &quot;release&quot; to make a bundle which can be copied and directly launched on a computer with the same OS, even if Elixir or Erlang are not installed on it. More informations about releases <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html">on the official documentation page</a></p>
+<h2 id="particularities" class="section-heading">
+  <a href="#particularities" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Particularities :
+</h2>
+
+<ul>
+<li><p>Elixir tasks are initiated by the <code class="inline">GenServer.cast</code> functions to avoid the wait for a transfer to complete before another one is launched (asynchronous transfers). Returns are received by the <code class="inline">handle_info</code> functions.</p>
+</li>
+<li><p>A file, named <code class="inline">sscs_tranfers.db</code> (DETS file), containing the failed transfers datas, is created or read when the SSCS server is launched. This file is located in the root folder of the application. </p>
+</li>
+<li><p>The HTML documentation, generated by <a href="https://github.com/elixir-lang/ex_doc">ExDoc</a>, is available in the <code class="inline">doc</code> folder. The @specs (giving the type of each argument) are not set, except for the SscsEx.SFTP module.</p>
+</li>
+<li><p>No other library than the standard Erlang :ssh and :ssh_sftp libraries has been used as dependencies for the SSH/SFTP part.</p>
+</li>
+</ul>
+<h2 id="dependencies-when-mix_env-prod" class="section-heading">
+  <a href="#dependencies-when-mix_env-prod" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Dependencies (when MIX_ENV = prod):
+</h2>
+
+<p>Only:</p>
+<ul>
+<li><a href="https://github.com/zyro/elixir-uuid">Elixir_uuid</a>: To generate unique Ids for transfers,
+</li>
+<li><a href="https://github.com/onkel-dirtus/logger_file_backend">Logger File Backend</a>: To enable logging in the console and in a file.
+</li>
+</ul>
+<h2 id="system-variables" class="section-heading">
+  <a href="#system-variables" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  System variables :
+</h2>
+
+<p>The following variables:</p>
+<ul>
+<li><code class="inline">SSCS_PORT</code> (Integer : 0-65536) = listening port of the SSCS server (default = 5555),
+</li>
+<li><code class="inline">SSCS_LOG_FILE</code> (String) = complete path to the log file (default = subfolder/file &quot;/log/sscs.log&quot; of the release),
+</li>
+<li><code class="inline">SSCS_ROOT_DIR</code> (String) : root folder to send or receive files (default = subfolder &quot;/sftp&quot; of the release),
+</li>
+<li><code class="inline">SSCS_AUTH_DIR</code> (String) : folder containing the authorized keys (default = subfolder &quot;/sftp/.ssh&quot; of the release),
+</li>
+<li><code class="inline">SSCS_SYSTEM_DIR</code> (String) : folder containing the server SSH keys (default = subfolder &quot;/sftp/ssh_daemon&quot; of the release),
+</li>
+<li><code class="inline">SSCS_STREAM_BYTES</code> (Integer): Size of chunks streamed, in bytes (default = 2 Mo),
+</li>
+<li><code class="inline">SSCS_CHECKSUM_TYPE</code> (String : &quot;sha&quot;, &quot;sha224&quot; &quot;sha256&quot;,&quot;sha384&quot;,&quot;sha512&quot;,&quot;sha3_224&quot;, &quot;sha3_256&quot;,&quot;sha3_384&quot;,&quot;sha3_512&quot;, &quot;blake2b&quot;, &quot;blake2s&quot;, &quot;md5&quot;, &quot;md4&quot;): checksum type used (default = &quot;sha256&quot;).
+</li>
+<li><code class="inline">SSCS_OVERWRITE</code> (String: &quot;true&quot; or &quot;false&quot;): Enable or disable overwriting destination files if they exist. No retry attempted if with SSCS_OVERWRITE set to false (default = &quot;false&quot;),
+</li>
+<li><code class="inline">SSCS_RETRIES</code> (Integer): max retries to  a failed transfer (default = 3),
+</li>
+<li><code class="inline">SSCS_TEMP_RETRY</code> (Integer): time, in milli-seconds, between two retry attempts (default = 180000, 3 minutes).
+</li>
+</ul>
+<p>can be set before launching the SSCS server.</p>
+<p>The SSCS server will log simultaneously in the  <code class="inline">SSCS_LOG_FILE</code> and in the console.</p>
+<p>Examples :</p>
+<p><code class="inline">14:39:09.708 [info] SUCCESS: Transfer_id = &quot;8ac1d2c6-bfcc-4412-867f-3d771ead3ecb&quot; : Local file = c:/SSCS/sftp/success.txt sent to : Remote file = tr/success.txt : Remote server = &#39;mydistantSSCSserver&#39;:5555 : Average transfer rate = 0.0 Mb/s : Checksum (type: sha256 ) for both files = C784C2AF93C512DA33C363A2E3D8CEAFE45D3A80B88B762CE015914B00D496AD</code></p>
+<p>or (with <code class="inline">SSCS_OVERWRITE</code> set to &quot;false&quot;):</p>
+<p><code class="inline">10:51:48.459 [error] FAILURE : Transfer_id = &quot;8e0eb430-42d5-49ce-b472-4ccfd876c476&quot; : Local file = c:/SSCS/sftp/failure.txt WAS NOT sent to : Remote file = tr/failure.txt: Remote server = &#39;localhost&#39;:5000} : &quot;Upload error: Remote file tr/failure.txt already exists.&quot; NO RETRY permitted !</code> </p>
+<p>or:</p>
+<p><code class="inline">10:54:48.528 [error] FAILURE (Retry 1): Transfer_id = &quot;8e0eb430-42d5-4412-867f-3d771ead3ecb&quot; : Local file = c:/SSCS/sftp/resume.txt WAS NOT sent to : Remote file = tr/resume.txt : Remote server = &#39;localhost&#39;:5000} : &quot;Connection error - Reason: :econnrefused&quot; Retrying later...</code></p>
+<p><code class="inline">10:57:48.559 [error] FAILURE (Retry 2): Transfer_id = &quot;8e0eb430-42d5-4412-867f-3d771ead3ecb&quot; : Local file = c:/SSCS/sftp/resume.txt WAS NOT sent to : Remote file = tr/resume.txt : Remote server = &#39;localhost&#39;:5000} : &quot;Connection error - Reason: :econnrefused&quot; Retrying later...</code></p>
+<p><code class="inline">11:00:48.590 [info] : Transfer_id = &quot;8e0eb430-42d5-49ce-b472-4ccfd876c476&quot; : Local file = c:/SSCS/sftp/resume.txt was sent to : Remote file = tr/resume.txt : Remote server = &#39;localhost&#39;:5000} : Average transfer rate = 0.0 Mb/s : Checksum (type: sha256 ) for both files = 3EEE6DBF789756FAF9C9BCE07FEB38FEAF221E83E4FA83D61D39A6B63D47F335</code></p>
+<h2 id="sscs-available-functions" class="section-heading">
+  <a href="#sscs-available-functions" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  SSCS available functions :
+</h2>
+
+<ul>
+<li><code class="inline">SscsEx.start(&quot;&quot;,&quot;&quot;)</code> : Start the server.
+</li>
+<li><code class="inline">SscsEx.stop()</code> : Stop the server.
+</li>
+<li><code class="inline">SscsEx.get_conf()</code> :  Display the current configuration (SSH, transferts, logging) of the application, as an array.
+</li>
+<li><code class="inline">SscsEx.display_failed_transfers()</code> : Display the failed transfers list.
+</li>
+<li><code class="inline">SscsEx.clean_failed_transfers()</code> : Empty the failed transfers list.
+</li>
+<li><code class="inline">SscsEx.ping(&#39;&lt;host_name&gt;&#39;,&lt;port&gt;)</code> : Check if a SSCS server is reachable.
+</li>
+<li><code class="inline">SscsEx.send_file(local_path, remote_path, host, port)</code>:  Send/Upload a file.
+</li>
+<li><code class="inline">SscsEx.get_file(local_path, remote_path, host, port)</code>:  Get/Download a file.
+</li>
+<li><code class="inline">SscsEx.send_file_append(local_path, remote_path, host, port)</code> :  Append the exceeding part of local file to the remote file, with checksum checks (<code class="inline">WARNING !</code>: No verification done a priori to ensure that the remote file is the first part of the local file !!!).
+</li>
+<li><code class="inline">SscsEx.get_file_append(local_path, remote_path, host, port)</code> :  Append the exceeding part of remote file to the local file, with checksum checks (<code class="inline">WARNING !</code>: No verification done a priori to ensure that the local file is the first part of the remote file !!!).
+</li>
+</ul>
+<p>with:</p>
+<ul>
+<li><code class="inline">local_path</code>(String surrounded by &#39; or &quot;, ) = complete path of the local file, relative to the <code class="inline">SSCS_ROOT_DIR</code>, 
+</li>
+<li><code class="inline">remote_path</code> (String surrounded by &#39; or &quot;, ) = complete path of the remote file, relative to the <code class="inline">SSCS_ROOT_DIR</code>, 
+</li>
+<li><code class="inline">host</code> (String surrounded by &#39; or &quot;, ) = name of remote server (IP address or DNS name),
+</li>
+<li><code class="inline">port</code> (integer: 0 to 65535) = listening port of SSCS remote server.
+</li>
+</ul>
+<h2 id="sscs-server-launch-using-a-release" class="section-heading">
+  <a href="#sscs-server-launch-using-a-release" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  SSCS server launch (using a release) :
+</h2>
+
+<p><code class="inline">&lt;release folder&gt;\bin\SSCS_ex start</code> (*)</p>
+<p>The console should display:</p>
+<p><code class="inline">[info] SSCS server started on port 5555...</code></p>
+<h2 id="transfers-launches-console-or-script" class="section-heading">
+  <a href="#transfers-launches-console-or-script" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Transfers launches (console or script)
+</h2>
+
+<p>Open another console then type :</p>
+<p><code class="inline">&lt;release folder&gt;\bin\SSCS_ex rpc &quot;&lt;function&gt;(&lt;arguments&gt;)&quot;</code></p>
+<p><em>example: <code class="inline">SSCS_ex rpc &quot;SscsEx.send_file(&#39;mysourcefile.ext&#39;, &#39;mydestinationfile.ext&#39;, &#39;myremotehost&#39;, 5555)&quot;</code></em></p>
+<h2 id="properly-stop-the-sscs-server" class="section-heading">
+  <a href="#properly-stop-the-sscs-server" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  (Properly) stop the SSCS server
+</h2>
+
+<p><code class="inline">&lt;release folder&gt;\bin\SSCS_ex stop</code> (*)</p>
+<p>(*): <em>To see all the availables options depending on the OS, go to the <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html">official documentation page of Mix Release</a></em></p>
+<p><em>On Windows, commands are:</em></p>
+<ul>
+<li><p><em><code class="inline">start</code>: Start the SSCS server,</em></p>
+</li>
+<li><p><em><code class="inline">start_iex</code>: Start the SSCS server in an IEx console (Elixir interpreter),</em></p>
+</li>
+<li><p><em><code class="inline">install</code>: Install the SSCS server as a Windows service,</em></p>
+</li>
+<li><p><em><code class="inline">rpc &quot;FUNC&quot;</code>: Executes the &quot;FUNC&quot; function,</em></p>
+</li>
+<li><p><em><code class="inline">restart</code>: Restart the SSCS server,</em></p>
+</li>
+<li><p><em><code class="inline">stop</code>: Stop the SSCS server,</em></p>
+</li>
+<li><p><em><code class="inline">pid</code>: Display the SSCS server PID,</em></p>
+</li>
+<li><p><em><code class="inline">version</code>: Display the SSCS server version.</em></p>
+<h2 id="credits" class="section-heading">
+  <a href="#credits" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Credits :
+</h2>
+
+<p>Great thanks to:</p>
+</li>
+<li><p><code class="inline">Michael Dorman</code> for his <a href="https://github.com/mikejdorm/sftp_ex">Sftp_Ex library</a>,</p>
+</li>
+<li><p><code class="inline">Codenaut</code> for his <a href="https://github.com/Codenaut/exsftpd">Exsftpd library</a>,</p>
+</li>
+<li><p><code class="inline">Tobias Casper</code> for his <a href="https://github.com/i22-digitalagentur/sftp_client">SFTP Client library</a>,</p>
+</li>
+<li><p><code class="inline">All the people</code> who kindly gave me help on the <a href="https://elixirforum.com/t/secure-files-transfers-servers-in-elixir/21119">Elixir Forum</a>.</p>
+</li>
+</ul>
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.21.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>

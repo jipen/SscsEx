@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.21.2">
+    <meta name="project" content="SSCS Ex v0.1.0">
+      <meta name="author" content="Jipen">
+    <title>SscsEx — SSCS Ex v0.1.0</title>
+    <link rel="stylesheet" href="dist/html-de2388dc2f8074b0a4db.css" />
+    <script src="dist/sidebar_items-2ef0771db5.js"></script>
+      <script src="docs_config.js"></script>
+    <script async src="dist/html-de2388dc2f8074b0a4db.js"></script>
+  </head>
+  <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode') === 'true') document.body.className += ' night-mode'; } catch (e) { }</script>
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button">
+      <span class="icon-cross" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" id="search-list" class="search-input" placeholder="Search..." aria-label="Search" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="SscsEx.html" class="sidebar-projectName">
+SSCS Ex      </a>
+      <h2 class="sidebar-projectVersion">
+        v0.1.0
+      </h2>
+    </div>
+      <a href="SscsEx.html">
+        <img src="assets/logo.png" alt="SSCS Ex" class="sidebar-projectImage">
+      </a>
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+        <small class="app-vsn">SSCS Ex v0.1.0</small>
+SscsEx      </h1>
+
+
+        <section id="moduledoc">
+<p>SscsEx: A Simple Sftp Client/Server written in Elixir.
+See <a href="https://hexdocs.pm/elixir/Application.html">https://hexdocs.pm/elixir/Application.html</a>
+for more information on OTP Applications</p>
+        </section>
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#clean_failed_transfers/0">clean_failed_transfers()</a>
+  </div>
+    <div class="summary-synopsis"><p>Remove all failed transfers from the list</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#display_failed_transfers/0">display_failed_transfers()</a>
+  </div>
+    <div class="summary-synopsis"><p>Display the list of failed transfers</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_conf/0">get_conf()</a>
+  </div>
+    <div class="summary-synopsis"><p>Display the configuration of the SSCS server (system variables SSCS_* values)</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_file/4">get_file(local_path, remote_path, host, port)</a>
+  </div>
+    <div class="summary-synopsis"><p>Download of a remote file.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_file_append/4">get_file_append(local_path, remote_path, host, port)</a>
+  </div>
+    <div class="summary-synopsis"><p>Resume the download of a remote file.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#ping/2">ping(host, port)</a>
+  </div>
+    <div class="summary-synopsis"><p>Ping a remote server</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_file/4">send_file(local_path, remote_path, host, port)</a>
+  </div>
+    <div class="summary-synopsis"><p>Upload of a local file.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_file_append/4">send_file_append(local_path, remote_path, host, port)</a>
+  </div>
+    <div class="summary-synopsis"><p>Resume the upload of a local file.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#start/0">start()</a>
+  </div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#start/2">start(type, args)</a>
+  </div>
+    <div class="summary-synopsis"><p>Called when an application is started.</p></div>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#stop/0">stop()</a>
+  </div>
+    <div class="summary-synopsis"><p>&quot;Gracefully&quot; stops the SSCS server (close SSH + save failed transfers on disk)</p></div>
+</div>
+  </div>
+        </section>
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions          </h1>
+          <div class="functions-list">
+<section class="detail" id="clean_failed_transfers/0">
+  <div class="detail-header">
+    <a href="#clean_failed_transfers/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">clean_failed_transfers()</h1>
+  </div>
+  <section class="docstring">
+<p>Remove all failed transfers from the list:</p>
+<h2 id="clean_failed_transfers/0-inputs" class="section-heading">
+  <a href="#clean_failed_transfers/0-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>None.
+</li>
+</ul>
+<h2 id="clean_failed_transfers/0-outputs" class="section-heading">
+  <a href="#clean_failed_transfers/0-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>&quot;Failed transfers table cleaned up.&quot;
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="display_failed_transfers/0">
+  <div class="detail-header">
+    <a href="#display_failed_transfers/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">display_failed_transfers()</h1>
+  </div>
+  <section class="docstring">
+<p>Display the list of failed transfers:</p>
+<h2 id="display_failed_transfers/0-inputs" class="section-heading">
+  <a href="#display_failed_transfers/0-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>None.
+</li>
+</ul>
+<h2 id="display_failed_transfers/0-outputs" class="section-heading">
+  <a href="#display_failed_transfers/0-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>List of transfers
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="get_conf/0">
+  <div class="detail-header">
+    <a href="#get_conf/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_conf()</h1>
+  </div>
+  <section class="docstring">
+<p>Display the configuration of the SSCS server (system variables SSCS_* values):</p>
+<h2 id="get_conf/0-inputs" class="section-heading">
+  <a href="#get_conf/0-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>None.
+</li>
+</ul>
+<h2 id="get_conf/0-outputs" class="section-heading">
+  <a href="#get_conf/0-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>List of SSCS_* values
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="get_file/4">
+  <div class="detail-header">
+    <a href="#get_file/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_file(local_path, remote_path, host, port)</h1>
+  </div>
+  <section class="docstring">
+<p>Download of a remote file.</p>
+<h2 id="get_file/4-inputs" class="section-heading">
+  <a href="#get_file/4-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>local_path: path of the local file, 
+</li>
+<li>remote_path: path of the remote file,
+</li>
+<li>host: host name of remote server,
+</li>
+<li>port: port number of listening remote server
+</li>
+</ul>
+<h2 id="get_file/4-outputs" class="section-heading">
+  <a href="#get_file/4-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>{:ok, <em>message</em>} | {:error, <em>reason</em>}
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="get_file_append/4">
+  <div class="detail-header">
+    <a href="#get_file_append/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">get_file_append(local_path, remote_path, host, port)</h1>
+  </div>
+  <section class="docstring">
+<p>Resume the download of a remote file.</p>
+<h2 id="get_file_append/4-inputs" class="section-heading">
+  <a href="#get_file_append/4-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>local_path: path of the local file, 
+</li>
+<li>remote_path: path of the remote file,
+</li>
+<li>host: host name of remote server,
+</li>
+<li>port: port number of listening remote server
+</li>
+</ul>
+<h2 id="get_file_append/4-outputs" class="section-heading">
+  <a href="#get_file_append/4-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>{:ok, <em>message</em>} | {:error, <em>reason</em>}
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="ping/2">
+  <div class="detail-header">
+    <a href="#ping/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">ping(host, port)</h1>
+  </div>
+  <section class="docstring">
+<p>Ping a remote server:</p>
+<h2 id="ping/2-inputs" class="section-heading">
+  <a href="#ping/2-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>host: name of remote host,
+</li>
+<li>port: port of remote host.
+</li>
+</ul>
+<h2 id="ping/2-outputs" class="section-heading">
+  <a href="#ping/2-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>{:ok, &quot;SSH Host <em>host</em>, <em>port</em> is reachable&quot;} | {:error, &quot;SSH Host <em>host</em>, <em>port</em> is unreachable&quot; }
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="send_file/4">
+  <div class="detail-header">
+    <a href="#send_file/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">send_file(local_path, remote_path, host, port)</h1>
+  </div>
+  <section class="docstring">
+<p>Upload of a local file.</p>
+<h2 id="send_file/4-inputs" class="section-heading">
+  <a href="#send_file/4-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>local_path: path of the local file, 
+</li>
+<li>remote_path: path of the remote file,
+</li>
+<li>host: host name of remote server,
+</li>
+<li>port: port number of listening remote server
+</li>
+</ul>
+<h2 id="send_file/4-outputs" class="section-heading">
+  <a href="#send_file/4-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>{:ok, <em>message</em>} | {:error, <em>reason</em>}
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="send_file_append/4">
+  <div class="detail-header">
+    <a href="#send_file_append/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">send_file_append(local_path, remote_path, host, port)</h1>
+  </div>
+  <section class="docstring">
+<p>Resume the upload of a local file.</p>
+<h2 id="send_file_append/4-inputs" class="section-heading">
+  <a href="#send_file_append/4-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>local_path: path of the local file, 
+</li>
+<li>remote_path: path of the remote file,
+</li>
+<li>host: host name of remote server,
+</li>
+<li>port: port number of listening remote server
+</li>
+</ul>
+<h2 id="send_file_append/4-outputs" class="section-heading">
+  <a href="#send_file_append/4-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>{:ok, <em>message</em>} | {:error, <em>reason</em>}
+</li>
+</ul>
+  </section>
+</section>
+<section class="detail" id="start/0">
+  <div class="detail-header">
+    <a href="#start/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">start()</h1>
+  </div>
+  <section class="docstring">
+  </section>
+</section>
+<section class="detail" id="start/2">
+  <div class="detail-header">
+    <a href="#start/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">start(type, args)</h1>
+  </div>
+  <section class="docstring">
+<p>Called when an application is started.</p>
+<p>This function is called when an application is started using
+<a href="https://hexdocs.pm/elixir/Application.html#start/2"><code class="inline">Application.start/2</code></a> (and functions on top of that, such as
+<a href="https://hexdocs.pm/elixir/Application.html#ensure_started/2"><code class="inline">Application.ensure_started/2</code></a>). This function should start the top-level
+process of the application (which should be the top supervisor of the
+application&#39;s supervision tree if the application follows the OTP design
+principles around supervision).</p>
+<p><code class="inline">start_type</code> defines how the application is started:</p>
+<ul>
+<li><code class="inline">:normal</code> - used if the startup is a normal startup or if the application
+is distributed and is started on the current node because of a failover
+from another node and the application specification key <code class="inline">:start_phases</code>
+is <code class="inline">:undefined</code>.
+</li>
+<li><code class="inline">{:takeover, node}</code> - used if the application is distributed and is
+started on the current node because of a failover on the node <code class="inline">node</code>.
+</li>
+<li><code class="inline">{:failover, node}</code> - used if the application is distributed and is
+started on the current node because of a failover on node <code class="inline">node</code>, and the
+application specification key <code class="inline">:start_phases</code> is not <code class="inline">:undefined</code>.
+</li>
+</ul>
+<p><code class="inline">start_args</code> are the arguments passed to the application in the <code class="inline">:mod</code>
+specification key (e.g., <code class="inline">mod: {MyApp, [:my_args]}</code>).</p>
+<p>This function should either return <code class="inline">{:ok, pid}</code> or <code class="inline">{:ok, pid, state}</code> if
+startup is successful. <code class="inline">pid</code> should be the PID of the top supervisor. <code class="inline">state</code>
+can be an arbitrary term, and if omitted will default to <code class="inline">[]</code>; if the
+application is later stopped, <code class="inline">state</code> is passed to the <code class="inline">stop/1</code> callback (see
+the documentation for the <code class="inline">c:stop/1</code> callback for more information).</p>
+<p><code class="inline">use Application</code> provides no default implementation for the <a href="#start/2"><code class="inline">start/2</code></a>
+callback.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/elixir/Application.html#c:start/2"><code class="inline">Application.start/2</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="stop/0">
+  <div class="detail-header">
+    <a href="#stop/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">stop()</h1>
+  </div>
+  <section class="docstring">
+<p>&quot;Gracefully&quot; stops the SSCS server (close SSH + save failed transfers on disk):</p>
+<h2 id="stop/0-inputs" class="section-heading">
+  <a href="#stop/0-inputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Inputs:
+</h2>
+
+<ul>
+<li>None.
+</li>
+</ul>
+<h2 id="stop/0-outputs" class="section-heading">
+  <a href="#stop/0-outputs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Outputs:
+</h2>
+
+<ul>
+<li>&quot;Gracefully terminating the SSCS server...&quot;
+</li>
+</ul>
+  </section>
+</section>
+          </div>
+        </section>
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.21.2),
+          </span>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+  </body>
+</html>
